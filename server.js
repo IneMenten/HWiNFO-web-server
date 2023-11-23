@@ -30,7 +30,7 @@ app.get('/', (_req, res) => {
 						innerJson += `"${key}": "${value}",`;
 					}
 				});
-				if (i == data.length - properties) {
+				if (i == data.length - properties.length) {
 					innerJson += '}';
 				} else {
 					innerJson += '},';
@@ -43,7 +43,9 @@ app.get('/', (_req, res) => {
 	);
 });
 
-app.get('/kill', (_req, _res) => {
+app.get('/kill', (_req, res) => {
+	console.log('Application stopped on ' + new Date());
+	res.status(200).set('Content-Type', 'text/plain').send('Shutting down application')
 	setTimeout(() => process.exit(), 500);
 });
 
